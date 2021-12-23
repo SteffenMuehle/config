@@ -1,0 +1,6 @@
+[user]
+	email = steffen_muehle@gmx.de
+	name = SteffenMuehle
+[alias]
+	graph = log --oneline --graph --decorate --all
+	gra = log --oneline --graph --decorate --all
