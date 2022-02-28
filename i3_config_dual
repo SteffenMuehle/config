@@ -108,7 +108,7 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Firefox+Emails"
-set $ws2 "2: Atom"
+set $ws2 "2: Code"
 set $ws3 "3: Zotero+PDF"
 set $ws4 "4: Obsidian"
 set $ws5 "5: Terminals"
@@ -192,6 +192,7 @@ assign [class="Thunderbird"] $ws1
 assign [class="thunderbird"] $ws1
 assign [class="Mail"] $ws1
 assign [class="Atom"] $ws2
+assign [class="Code"] $ws2
 assign [class="Zotero"] $ws3
 assign [class="okular"] $ws3
 assign [class="obsidian"] $ws4
