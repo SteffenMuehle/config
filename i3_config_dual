@@ -42,24 +42,24 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec gnome-terminal
+# hotkeys (keybindings)
+bindsym $mod+Return exec gnome-terminal # <--- terminal
+bindsym $mod+Shift+d exec dmenu_run     # <--- d-menu
+bindsym $mod+f exec firefox             # <--- browser=firefox
+bindsym $mod+t exec thunderbird         # <--- emails=thunderbird
+bindsym $mod+c exec code                # <--- vscode
+bindsym $mod+o exec obsidian            # <--- obsidian
+bindsym $mod+n exec nautilus            # <--- explorer=nautilus
+bindsym $mod+z exec zotero              # <--- zotero
+bindsym $MOD+l exec i3lock -c 9999bb    # <--- i3lock
+bindsym $mod+Shift+f fullscreen toggle  # <--- fullscreen
+bindsym $mod+Escape kill window         # <--- close current window
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"  # exit i3 (logs you out of your X session)
 
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -67,31 +67,22 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# split in horizontal/vertical orientation
 bindsym $mod+h split h
-
-# split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+a layout tabbed
+bindsym $mod+s layout toggle split
+bindsym $mod+d layout stacking
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -100,7 +91,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -146,8 +137,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -186,8 +175,10 @@ bar {
 #####################################
 ############# CUSTOM ################
 #####################################
+# get window class with 'xprop' command #
 
 assign [class="Firefox"] $ws1
+assign [class="firefox"] $ws1
 assign [class="Thunderbird"] $ws1
 assign [class="thunderbird"] $ws1
 assign [class="Mail"] $ws1
@@ -203,10 +194,10 @@ assign [class="zoom"] $ws10
 for_window [urgent="latest"] focus
 
 exec firefox
-exec firefox
 exec obsidian
 exec gnome-terminal
 exec nautilus
+exec maestral start
 
 workspace 1 output DP-0
 workspace 2 output DP-0
@@ -216,5 +207,8 @@ workspace 5 output DP-7
 workspace 6 output DP-7
 workspace 10 output DP-7
 
+# Multi-screen screenshots with scrot
+bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
 
-bindsym $MOD+SHIFT+x exec i3lock -c 9999bb
+# OSX-like area selection screenshots
+bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
