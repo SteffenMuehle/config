@@ -141,8 +141,9 @@ toolsversions:
 - rustyy
 - pre-commit
 - linters
+    - ruff
+    - mypy
 - pydantic
-- ruff
 - just
 - pytest
 - GH repo w/ tests
